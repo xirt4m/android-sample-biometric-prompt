@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Biometric Prompt Sample</string>
+
+    <string name="prompt_title">Prompt Title</string>
+    <string name="prompt_subtitle">Prompt Subtitle</string>
+    <string name="prompt_description">Prompt Description: lorem ipsum dolor sit amet.</string>
+    <string name="prompt_negative_button">@android:string/cancel</string>
+
+    <string name="main_encrypt">Encrypt</string>
+    <string name="main_decrypt">Decrypt</string>
+    <string name="main_keytore">Android KeyStore</string>
+    <string name="main_tink">Tink</string>
+
+    <string name="main_encrypted">Encrypted:\n\n%1$s</string>
+    <string name="main_decrypted">Decrypted:\n\n%1$s</string>
+
+    <string name="main_encrypt_success">encrypt success</string>
+    <string name="main_encrypt_failed">encrypt failed</string>
+
+    <string name="main_decrypt_success">decrypt success</string>
+    <string name="main_decrypt_failed">decrypt failed</string>
 </resources>

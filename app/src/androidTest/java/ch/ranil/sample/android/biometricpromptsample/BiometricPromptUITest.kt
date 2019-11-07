@@ -1,7 +1,6 @@
 package ch.ranil.sample.android.biometricpromptsample
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -9,6 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
+import ch.ranil.sample.android.biometricpromptsample.ui.main.MainActivity
 import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
 import org.junit.Test
@@ -36,7 +36,7 @@ class BiometricPromptUITest {
         onView(withId(R.id.textView))
             .check(matches(withText("Secure Text!")))
 
-        onView(withId(R.id.buttonEncrypt))
+        onView(withId(R.id.buttonEncryptKeystore))
             .perform(click())
 
         // time to "touch" fingerprint
@@ -49,7 +49,7 @@ class BiometricPromptUITest {
         //
         // decrypt
         //
-        onView(withId(R.id.buttonDecrypt))
+        onView(withId(R.id.buttonDecryptKeystore))
             .perform(click())
 
         // time to "touch" fingerprint

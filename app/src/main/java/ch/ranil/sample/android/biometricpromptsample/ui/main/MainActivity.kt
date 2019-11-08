@@ -2,19 +2,21 @@ package ch.ranil.sample.android.biometricpromptsample.ui.main
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import ch.ranil.sample.android.biometricpromptsample.R
+import ch.ranil.sample.android.biometricpromptsample.databinding.ActivityMainBinding
 import ch.ranil.sample.android.biometricpromptsample.di.base.BaseActivity
 import ch.ranil.sample.android.biometricpromptsample.di.base.getViewModelFromFactory
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainViewModel>() {
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun provideViewModel() = getViewModelFromFactory()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setupObservers()
 
@@ -25,38 +27,38 @@ class MainActivity : BaseActivity<MainViewModel>() {
     private fun setupObservers() {
         viewModel.text.observe(this, Observer { text ->
             text?.let {
-                textView.text = text
+                binding.textView.text = text
             }
         })
 
         viewModel.alert.observe(this, Observer { message ->
             message?.let {
-                Snackbar.make(rootLayout, it, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.rootLayout, it, Snackbar.LENGTH_SHORT).show()
                 viewModel.onSnackbarShown()
             }
         })
     }
 
     private fun setupKeystoreButtons() {
-        buttonEncryptKeystore.setOnClickListener {
+        binding.buttonEncryptKeystore.setOnClickListener {
             viewModel.onEncryptKeystoreButtonClick(
                 this,
                 SECURE_TEXT_KEYSTORE
             )
         }
-        buttonDecryptKeystore.setOnClickListener {
+        binding.buttonDecryptKeystore.setOnClickListener {
             viewModel.onDecryptKeystoreButtonClick(this)
         }
     }
 
     private fun setupTinkButtons() {
-        buttonEncryptTink.setOnClickListener {
+        binding.buttonEncryptTink.setOnClickListener {
             viewModel.onEncryptTinkButtonClick(
                 this,
                 SECURE_TEXT_TINK
             )
         }
-        buttonDecryptTink.setOnClickListener {
+        binding.buttonDecryptTink.setOnClickListener {
             viewModel.onDecryptTinkButtonClick(this)
         }
     }

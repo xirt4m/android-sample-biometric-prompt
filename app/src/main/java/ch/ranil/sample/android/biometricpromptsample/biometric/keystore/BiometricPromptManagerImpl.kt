@@ -1,6 +1,7 @@
 package ch.ranil.sample.android.biometricpromptsample.biometric.keystore
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.Log
@@ -18,8 +19,11 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 import javax.inject.Inject
 
-class BiometricPromptManagerImpl @Inject constructor(context: Context) :
-    BaseBiometricPromptManager(context) {
+class BiometricPromptManagerImpl @Inject constructor(
+    context: Context,
+    sharedPreferences: SharedPreferences
+) :
+    BaseBiometricPromptManager(context, sharedPreferences) {
 
     private val keyStore: KeyStore = KeyStore.getInstance(KEYSTORE).apply { load(null) }
 

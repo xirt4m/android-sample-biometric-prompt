@@ -10,6 +10,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
+        AppModule::class,
         ViewModelModule::class,
         BiometricModule::class,
         ProviderModule::class

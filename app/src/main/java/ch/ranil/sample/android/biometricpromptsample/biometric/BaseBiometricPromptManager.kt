@@ -5,16 +5,13 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.FragmentActivity
-import androidx.preference.PreferenceManager
 import ch.ranil.sample.android.biometricpromptsample.R
 import java.util.concurrent.Executors
 import javax.crypto.Cipher
 
 abstract class BaseBiometricPromptManager(
     protected val context: Context,
-    protected val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(
-        context
-    )
+    protected val sharedPreferences: SharedPreferences
 ) : BiometricPromptManager {
 
     //region Decrypt
@@ -69,7 +66,7 @@ abstract class BaseBiometricPromptManager(
     ) {
         val executor = Executors.newSingleThreadExecutor()
         val biometricPrompt =
-            BiometricPrompt(activity, executor, object : BiometricPrompt.AuthenticationCallback() {
+            BiometricPrompt(activity, executor, object : AuthCallback() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
 
@@ -123,6 +120,8 @@ abstract class BaseBiometricPromptManager(
             .setSubtitle(context.getText(R.string.prompt_subtitle))
             .setDescription(context.getText(R.string.prompt_description))
             .setNegativeButtonText(context.getText(R.string.prompt_negative_button))
+            //.setDeviceCredentialAllowed(true)
+            //.setConfirmationRequired(true)
             .build()
     }
 
@@ -131,3 +130,5 @@ abstract class BaseBiometricPromptManager(
     }
 
 }
+
+typealias AuthCallback = BiometricPrompt.AuthenticationCallback

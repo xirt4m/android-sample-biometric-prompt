@@ -1,6 +1,7 @@
 package ch.ranil.sample.android.biometricpromptsample.biometric.tink
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.edit
@@ -18,8 +19,11 @@ import com.google.crypto.tink.integration.android.AndroidKeysetManager
 import javax.inject.Inject
 
 
-class BiometricPromptTinkManager @Inject constructor(context: Context) :
-    BaseBiometricPromptManager(context) {
+class BiometricPromptTinkManager @Inject constructor(
+    context: Context,
+    sharedPreferences: SharedPreferences
+) :
+    BaseBiometricPromptManager(context, sharedPreferences) {
 
     private val aead: Aead
 
